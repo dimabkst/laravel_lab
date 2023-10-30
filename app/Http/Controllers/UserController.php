@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Constants\PaginationConstants;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -63,7 +64,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit')->with('user', $user);
     }
 
     /**
@@ -71,7 +72,28 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'bail|nullable|string|max:255',
+            'email' => ['bail', 'nullable', Rule::unique('users', 'email')->ignore($user),
+            ],
+            'password' => 'bail|nullable|string|min:6'
+        ]);
+
+        $updatePayload = [];
+
+        if ($request->input('name'))
+            $updatePayload[] = $request->input('name');
+
+        if ($request->input('email'))
+            $updatePayload[] = $request->input('email');
+
+        if ($request->input('password'))
+            $updatePayload[] = $request->input('password');
+
+        if(count($updatePayload))
+            $user->update($updatePayload);
+
+        return redirect()->route('users.show', ['user'=>$user->id]);
     }
 
     /**
