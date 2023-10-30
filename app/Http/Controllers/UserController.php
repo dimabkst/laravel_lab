@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -35,7 +35,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'bail|required|string|max:255',
+            'email' => 'bail|required|email|unique:users,email',
+            'password' => 'bail|required|string|min:6'
+        ]);
+
+        $newUser = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password') // saved hashed due to User model $casts
+        ]);
+
+        return redirect()->route('users.show', ['user'=>$newUser->id]);
     }
 
     /**
@@ -43,7 +55,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('users.show')->with('user', $user);
     }
 
     /**

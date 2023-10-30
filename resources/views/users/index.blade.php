@@ -4,7 +4,7 @@
 
 @section('content')
     <h2>Users</h2>
-    <table>
+    <table border="1">
         <tr>
             <th>Name</th>
             <th>Email</th>
