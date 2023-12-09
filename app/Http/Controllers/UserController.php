@@ -47,10 +47,13 @@ class UserController extends Controller
             'password' => 'bail|required|string|min:6'
         ]);
 
+        $creator = $request->user();
+
         $newUser = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => $request->input('password') // saved hashed due to User model $casts
+            'password' => $request->input('password'), // saved hashed due to User model $casts
+            'creator_user_id' => $creator?->id,
         ]);
 
         return redirect()->route('users.show', ['user'=>$newUser->id]);
