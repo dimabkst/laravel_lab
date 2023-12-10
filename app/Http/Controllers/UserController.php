@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Users\StoreUserRequest;
+use App\Http\Requests\Users\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Constants\PaginationConstants;
@@ -39,20 +41,16 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $request->validate([
-            'name' => 'bail|required|string|max:255',
-            'email' => 'bail|required|email|unique:users,email',
-            'password' => 'bail|required|string|min:6'
-        ]);
+        $validated = $request->validated();
 
         $creator = $request->user();
 
         $newUser = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => $request->input('password'), // saved hashed due to User model $casts
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => $validated['password'], // saved hashed due to User model $casts
             'creator_user_id' => $creator?->id,
         ]);
 
@@ -78,25 +76,20 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $request->validate([
-            'name' => 'bail|nullable|string|max:255',
-            'email' => ['bail', 'nullable', Rule::unique('users', 'email')->ignore($user),
-            ],
-            'password' => 'bail|nullable|string|min:6'
-        ]);
+        $validated = $request->validated();
 
         $updatePayload = [];
 
-        if ($request->input('name'))
-            $updatePayload[] = $request->input('name');
+        if ($validated['name'])
+            $updatePayload[] = $validated['name'];
 
-        if ($request->input('email'))
-            $updatePayload[] = $request->input('email');
+        if ($validated['email'])
+            $updatePayload[] = $validated['email'];
 
-        if ($request->input('password'))
-            $updatePayload[] = $request->input('password');
+        if ($validated['password'])
+            $updatePayload[] = $validated['password'];
 
         if(count($updatePayload))
             $user->update($updatePayload);
