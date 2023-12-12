@@ -1,19 +1,23 @@
-@extends('layouts.users')
+<x-app-layout>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-@section('routeName', 'create')
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Create User') }}
+        </h2>
+    </x-slot>
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
-@section('content')
-    <h2>Create User</h2>
+    <button>
+        <a href="{{ route('users.index') }}">Users list</a>
+    </button>
 
     <form method="POST" action="{{ route('users.store') }}">
         @csrf
@@ -35,4 +39,4 @@
 
         <button type="submit" class="btn btn-primary">Create User</button>
     </form>
-@endsection
+</x-app-layout>

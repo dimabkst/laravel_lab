@@ -1,19 +1,23 @@
-@extends('layouts.users')
+<x-app-layout>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-@section('routeName', 'edit')
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Update User') }}
+        </h2>
+    </x-slot>
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
-@section('content')
-    <h2>Update User {{$user->name}}</h2>
+    <button>
+        <a href="{{ route('users.show', $user) }}">User Details</a>
+    </button>
 
     <form method="POST" action="{{ route('users.update', $user) }}">
         @csrf
@@ -36,4 +40,4 @@
 
         <button type="submit" class="btn btn-primary">Update User</button>
     </form>
-@endsection
+</x-app-layout>

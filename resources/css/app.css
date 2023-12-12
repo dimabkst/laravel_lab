@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.default-table {
+    @apply table-auto border-collapse border border-gray-500;
+}
+
+.users-table-cell {
+    @apply border border-gray-500;
+}
+
+.underline-text-button {
+    @apply hover:underline
+}
+
+.default-button {
+    @apply hover:border-gray-500 border rounded border-gray-200 p-1
+}
