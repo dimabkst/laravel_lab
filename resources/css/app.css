@@ -17,3 +17,11 @@
 .default-button {
     @apply hover:border-gray-500 border rounded border-gray-200 p-1
 }
+
+.edit-button {
+    @apply default-button hover:bg-cyan-600 hover:text-white
+}
+
+.delete-button {
+    @apply default-button hover:bg-red-600 hover:text-white
+}

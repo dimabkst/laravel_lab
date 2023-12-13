@@ -6,8 +6,8 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="max-w-7xl m-auto sm:px-6 lg:px-8 flex justify-center">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-screen">
                 <div class="py-4 px-8 flex justify-between items-center">
                     <h1>Users List</h1>
 
@@ -20,7 +20,7 @@
                     {{ $users->links() }}
                 @endif
 
-                <div class="p-2">
+                <div class="p-2 h-screen">
                     <table class="default-table mx-auto w-full rounded outline outline-1">
                         <thead>
                         <tr class="text-center align-middle bg-gray-400 rounded">
@@ -43,11 +43,11 @@
                         </tbody>
                     </table>
 
+                    <div class="p-2">
+                        {{ $users->links() }}
+                    </div>
                 </div>
 
-                <div class="p-2">
-                    {{ $users->links() }}
-                </div>
             </div>
         </div>
     </div>
