@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.default-table {
+    @apply table-auto border-collapse border border-gray-500;
+}
+
+.users-table-cell {
+    @apply border border-gray-500;
+}
+
+.underline-text-button {
+    @apply hover:underline
+}
+
+.default-button {
+    @apply hover:border-gray-500 border rounded border-gray-200 p-1
+}
+
+.action-button {
+    @apply default-button hover:bg-cyan-600 hover:text-white
+}
+
+.delete-button {
+    @apply default-button hover:bg-red-600 hover:text-white
+}
+
+.form-control {
+    @apply rounded
+}
+
+.form-group {
+    @apply flex items-center justify-between
+}
+
+.alert-error {
+    @apply bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4
+}
