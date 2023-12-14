@@ -25,3 +25,11 @@
 .delete-button {
     @apply default-button hover:bg-red-600 hover:text-white
 }
+
+.form-control {
+    @apply rounded
+}
+
+.form-group {
+    @apply flex items-center justify-between
+}
