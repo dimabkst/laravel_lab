@@ -1,6 +1,6 @@
 <x-app-layout>
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <div class="alert-error">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="pb-6 pt-2 flex justify-center">
-                        <button class="edit-button" type="submit">Update User</button>
+                        <button class="action-button" type="submit">Update User</button>
                     </div>
                 </form>
             </div>

@@ -11,7 +11,7 @@
                 <div class="py-4 px-8 flex justify-between items-center">
                     <h1>Users List</h1>
 
-                    <button class="default-button">
+                    <button class="action-button">
                         <a href="{{ route('users.create') }}">Create User</a>
                     </button>
                 </div>
